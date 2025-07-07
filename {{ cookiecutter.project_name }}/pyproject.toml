@@ -3,7 +3,7 @@ requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 [project]
-name = "{{ cookiecutter.project_name }}"
+name = "{{ cookiecutter.package_name }}"
 dynamic = ["version"]
 description = "{{ cookiecutter.project_short_description }}"
 readme = "README.md"
@@ -23,19 +23,30 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = []
+dependencies = [
+]
 
 [project.optional-dependencies]
-types = [
-]
 tests = [
-  "{{ cookiecutter.project_name }}[types]",
+  "pytest",
+  "tomli ; python_version < '3.11'",
+]
+types = [
+  "{{ cookiecutter.package_name }}[tests]",
+  "typing-extensions",
+  "mypy",
+  "pyrefly",
+  "pyright[nodejs]",
+  "ty",
 ]
 
 [project.urls]
-Documentation = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}#readme"
-Issues = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/issues"
-Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}"
+Documentation = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}#readme"
+Issues = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}/issues"
+Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.package_name }}"
+
+[project.scripts]
+{{ cookiecutter.package_name }} = "{{ cookiecutter.module_name }}.__main__:main"
 
 ###############################################################################
 # region: hatch
@@ -44,21 +55,28 @@ Source = "https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.
 source = "vcs"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "src/{{ cookiecutter.project_slug }}/_version.py"
+version-file = "src/{{ cookiecutter.module_name }}/_version.py"
+{%- if cookiecutter.module_name != cookiecutter.package_name.replace('-', '_') %}
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "src/{{ cookiecutter.module_name }}",
+]
+{%- endif %}
 
 [tool.hatch.envs.hatch-test]
 extra-dependencies = [
-  "{{ cookiecutter.project_name }}[tests]",
+  "{{ cookiecutter.package_name }}[tests]",
 ]
 
 [tool.hatch.envs.types]
 extra-dependencies = [
   "mypy>=1.0.0",
-  "{{ cookiecutter.project_name }}[types]",
+  "{{ cookiecutter.package_name }}[types]",
 ]
 
 [tool.hatch.envs.types.scripts]
-check = "mypy --install-types --non-interactive {args:src/{{ cookiecutter.project_slug }} tests}"
+check = "mypy --install-types --non-interactive {args:src/{{ cookiecutter.module_name }} tests}"
 ###############################################################################
 # endregion: hatch
 ###############################################################################
@@ -76,14 +94,14 @@ index-url = "https://pypi.org/simple"
 # region: coverage
 ###############################################################################
 [tool.coverage.run]
-source_pkgs = ["{{ cookiecutter.project_slug }}", "tests"]
+source_pkgs = ["{{ cookiecutter.module_name }}", "tests"]
 branch = true
 parallel = true
 omit = [
 ]
 
 [tool.coverage.paths]
-{{ cookiecutter.project_slug }} = ["src/{{ cookiecutter.project_slug }}"]
+{{ cookiecutter.module_name }} = ["src/{{ cookiecutter.module_name }}"]
 tests = ["tests"]
 
 [tool.coverage.report]
@@ -138,13 +156,14 @@ select = [
   "ALL",
 ]
 ignore = [
-  "COM812", # missing-trailing-comma
-  "D",      # pydocstyle
-  "ERA001", # commented-out-code
-  "EXE003", # shebang-missing-python
-  "ISC001", # single-line-implicit-string-concatenation
-  "PTH",    # flake8-use-pathlib
-  "T20",    # flake8-print
+  "COM812",  # missing-trailing-comma
+  "D",       # pydocstyle
+  "ERA001",  # commented-out-code
+  "EXE003",  # shebang-missing-python
+  "ISC001",  # single-line-implicit-string-concatenation
+  "PTH",     # flake8-use-pathlib
+  "T20",     # flake8-print
+  "PLC0415", # import-outside-top-level
 ]
 
 [tool.ruff.format]

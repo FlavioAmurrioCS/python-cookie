@@ -48,8 +48,9 @@ def update_config(project_dir: str) -> CookieCutterConfig:
 
     slug = os.listdir(os.path.join(project_dir, "src"))[0]
 
-    sample_config["project_name"] = pyproject["project"]["name"]
-    sample_config["project_slug"] = slug
+    sample_config["project_name"] = os.path.basename(project_dir)
+    sample_config["package_name"] = pyproject["project"]["name"]
+    sample_config["module_name"] = slug
     sample_config["project_short_description"] = pyproject["project"]["description"]
     sample_config["minimum_python_version"] = pyproject["project"]["requires-python"].split("=")[-1].strip()
     sample_config["full_name"] = pyproject["project"]["authors"][0]["name"]

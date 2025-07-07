@@ -1,7 +1,8 @@
 # {{ cookiecutter.project_name }}
 
-[![PyPI - Version](https://img.shields.io/pypi/v/{{ cookiecutter.project_slug }}.svg)](https://pypi.org/project/{{ cookiecutter.project_slug }})
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_slug }}.svg)](https://pypi.org/project/{{ cookiecutter.project_slug }})
+[![PyPI - Version](https://img.shields.io/pypi/v/{{ cookiecutter.package_name }}.svg)](https://pypi.org/project/{{ cookiecutter.package_name }})
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/{{ cookiecutter.package_name }}.svg)](https://pypi.org/project/{{ cookiecutter.package_name }})
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/main.svg)](https://results.pre-commit.ci/latest/github/{{ cookiecutter.github_username }}/{{ cookiecutter.project_name }}/main)
 
 -----
 
@@ -13,9 +14,9 @@
 ## Installation
 
 ```console
-pip install {{ cookiecutter.project_slug }}
+pip install {{ cookiecutter.package_name }}
 ```
 
 ## License
 
-`{{ cookiecutter.project_slug }}` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
+`{{ cookiecutter.package_name }}` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.
