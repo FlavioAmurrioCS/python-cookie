@@ -3,7 +3,7 @@
   "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
   "module_name": "{{ cookiecutter.package_name.lower().replace('-', '_') }}",
   "project_short_description": "Awesome project description.",
-  "minimum_python_version": [ "3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.14" ],
+  "minimum_python_version": [ "3.9", "3.10", "3.11", "3.12", "3.13", "3.14" ],
   "full_name": "Flavio Amurrio",
   "email": "25621374+FlavioAmurrioCS@users.noreply.github.com",
   "github_username": "FlavioAmurrioCS"

@@ -77,6 +77,14 @@ extra-dependencies = [
 
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/{{ cookiecutter.module_name }} tests}"
+
+[[tool.hatch.envs.hatch-test.matrix]]
+python = [
+  {%- set python_start = (cookiecutter.minimum_python_version.split('.')[-1] | int) %}
+  {%- for item in range(python_start, 15) %}
+  "3.{{ item }}",
+  {%- endfor %}
+]
 ###############################################################################
 # endregion: hatch
 ###############################################################################

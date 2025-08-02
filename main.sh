@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 projects=(
-    comma-cli
+    # comma-cli
     # dev-toolbox
     # direct-deps
-    k6
-    lambda-dev-server
+    # k6
+    # lambda-dev-server
     # log-tool
     # persistent-cache-decorator
     # record-replay-compare
