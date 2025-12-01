@@ -1,3 +1,4 @@
+#:schema https://www.schemastore.org/pyproject.json
 [build-system]
 requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
@@ -27,17 +28,37 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-tests = [
+
+[dependency-groups]
+dev = [
+  { include-group = "test" },
+  { include-group = "types" },
+  # { include-group = "docs" },
+]
+test = [
   "pytest",
   "tomli ; python_version < '3.11'",
 ]
-types = [
-  "{{ cookiecutter.package_name }}[tests]",
+types_packages = [
+  { include-group = "test" },
   "typing-extensions",
+]
+types = [
+  { include-group = "types_packages" },
   "mypy",
+]
+types_other = [
+  { include-group = "types_packages" },
   "pyrefly",
   "pyright[nodejs]",
   "ty",
+]
+docs = [
+  "zensical",
+  "mkdocs-material",
+  "mkdocs-marimo",
+  "pymdown-extensions",
+  "click==8.2.1",
 ]
 
 [project.urls]
@@ -65,14 +86,13 @@ packages = [
 {%- endif %}
 
 [tool.hatch.envs.hatch-test]
-extra-dependencies = [
-  "{{ cookiecutter.package_name }}[tests]",
+dependency-groups = [
+  "test",
 ]
 
 [tool.hatch.envs.types]
-extra-dependencies = [
-  "mypy>=1.0.0",
-  "{{ cookiecutter.package_name }}[types]",
+dependency-groups = [
+  "types",
 ]
 
 [tool.hatch.envs.types.scripts]
