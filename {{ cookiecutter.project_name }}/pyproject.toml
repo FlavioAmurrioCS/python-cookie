@@ -33,7 +33,6 @@ dependencies = [
 dev = [
   { include-group = "test" },
   { include-group = "types" },
-  # { include-group = "docs" },
 ]
 test = [
   "pytest",

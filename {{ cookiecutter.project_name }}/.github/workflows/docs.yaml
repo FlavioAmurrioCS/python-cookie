@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+---
 name: Documentation
 on:
   push:
@@ -12,16 +14,13 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ "{{" }} steps.deployment.outputs.page_url ${{ "}}" }}
+      url: ${{ "{{" }} steps.deployment.outputs.page_url {{ "}}" }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/configure-pages@v5
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v5
-        with:
-          python-version: 3.x
-      - run: pip install zensical
-      - run: zensical build --clean
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - run: uv run --only-group docs zensical build --clean
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site
