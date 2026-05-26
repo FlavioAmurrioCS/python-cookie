@@ -3,13 +3,13 @@
 projects=(
     # comma-cli
     # dev-toolbox
-    # direct-deps
+    direct-deps
     # k6
     # lambda-dev-server
     # log-tool
     # persistent-cache-decorator
     # record-replay-compare
-    runtool
+    # runtool
     # typedfzf
     # uv-to-pipfile
     # workflows

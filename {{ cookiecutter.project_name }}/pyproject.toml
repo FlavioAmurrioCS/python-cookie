@@ -40,6 +40,7 @@ test = [
 ]
 types = [
   { include-group = "test" },
+  "mypy",
   "typing-extensions",
 ]
 type-checkers = [
