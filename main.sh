@@ -13,13 +13,15 @@ projects=(
     # typedfzf
     # uv-to-pipfile
     # workflows
+    # scriptx
+    pypi-typed
 )
 
 for project in "${projects[@]}"; do
     project_dir="${HOME}/dev/github.com/FlavioAmurrioCS/$project"
-    echo "Processing $project"
-    # uv run --script update.py "$project_dir"
+    # echo "Processing $project"
+    uv run --script update.py "$project_dir"
     # git -C "$project_dir" pull
-    git -C "$project_dir" branch | grep '^\*'
+    # git -C "$project_dir" branch | grep '^\*'
     # echo "${project_dir}"
 done

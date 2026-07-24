@@ -53,7 +53,8 @@ def update_config(project_dir: str) -> CookieCutterConfig:
     sample_config["package_name"] = pyproject["project"]["name"]
     sample_config["module_name"] = slug
     sample_config["project_short_description"] = pyproject["project"]["description"]
-    sample_config["minimum_python_version"] = pyproject["project"]["requires-python"].split("=")[-1].strip()
+    sample_config["minimum_python_version"] = "3.10"
+    # sample_config["minimum_python_version"] = pyproject["project"]["requires-python"].split("=")[-1].strip()
     sample_config["full_name"] = pyproject["project"]["authors"][0]["name"]
     sample_config["email"] = pyproject["project"]["authors"][0]["email"]
 
