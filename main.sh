@@ -3,7 +3,7 @@
 projects=(
     # comma-cli
     # dev-toolbox
-    direct-deps
+    # direct-deps
     # k6
     # lambda-dev-server
     # log-tool
@@ -14,6 +14,7 @@ projects=(
     # uv-to-pipfile
     # workflows
     # scriptx
+    pypi-typed
 )
 
 for project in "${projects[@]}"; do
